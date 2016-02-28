@@ -41,11 +41,10 @@ guard let carthageCommand = env["carthage_command"] else {
     fatalError("no command to execute")
 }
 
-let command = "carthage \(carthageCommand)"
+let command = "carthage \(carthageCommand) " + collectArgs(env).joinWithSeparator(" ")
 
-task.launchPath = "/bin/bash"
-task.arguments = ["-c", command] + collectArgs(env)
-
+task.launchPath = "/bin/bash" 
+task.arguments = ["-c", command] 
 print("Running carthage command: \(task.arguments!.reduce("") { str, arg in str + "\(arg) " })")
 
 // run the shell command
